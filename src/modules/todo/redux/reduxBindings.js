@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import Todo from './actions';
 
 export const mapStateToProps = state => ({
-  ...state.Todo
+  ...state.TodoState
 })
 
 export const mapDispatchToProps = dispatch => {
