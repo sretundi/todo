@@ -6,9 +6,6 @@ import TodoElement from './todoElement';
 const TodoList = (props) => {
   const listElements = props.todosList.map((todo, index) => {
     return (
-      // <div>
-      //   <p>{todo}</p>
-      // </div>
       <li key={index} >
         <TodoElement {...todo} {...props} index={index} /> 
       </li>

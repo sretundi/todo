@@ -1,12 +1,12 @@
 
-.todoElement:hover .deleteIcon {
+.todoElement:hover .todoElement__deleteIcon {
   opacity: 1;
 }
 
-.deleteIcon {
+.todoElement__deleteIcon {
   opacity: 0;
 }
 
-.deleteIcon:hover {
+.todoElement__deleteIcon:hover {
   opacity: 1;
 }

@@ -9,7 +9,7 @@ const TodoElement = (todo) => {
     <div className='todoElement'>
       <p>{todo.todoValue}</p>
       <button
-        className='deleteIcon'
+        className='todoElement__deleteIcon'
         onClick={() => todo.actions.deleteTodo(todo.index)}
       >Delete</button>
     </div>

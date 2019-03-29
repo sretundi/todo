@@ -10,7 +10,6 @@ import TodoList from './elements/todoList';
 
 import './index.css';
 
-// TODO: make BEM classnames
 const Todo = (props) => {
   return (
     <div className='todoContainer'>
