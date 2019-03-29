@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types'; 
 
+import TodoElement from './todoElement';
+
 const TodoList = (props) => {
-  const listElements = props.todosList.map((todo) => {
+  const listElements = props.todosList.map((todo, index) => {
     return (
       // <div>
       //   <p>{todo}</p>
       // </div>
-      <li>
-        { todo.todoValue }
+      <li key={index} >
+        <TodoElement {...todo} {...props} index={index} /> 
       </li>
     )
   })

@@ -1,5 +1,5 @@
 
-import { ACTION_CONSTANTS } from './actions';
+import actions, { ACTION_CONSTANTS } from './actions';
 import Todo from '../Todo';
 
 const initialState = () => {
@@ -15,6 +15,8 @@ const TodoReducer = (state = initialState(), action) => {
       return todoValueChange(state, action.data)
     case ACTION_CONSTANTS.SUMBIT_TODO: 
       return addTodoToList(state, action.data)
+    case ACTION_CONSTANTS.DELETE_TODO:
+      return deleteTodoFromList(state, action.data)
     default:
       return state;
   }
@@ -39,5 +41,14 @@ const addTodoToList = (state) => {
   }
   return state;
 }
+
+const deleteTodoFromList = (state, index) => {
+  const updatedList = [...state.todosList];
+  updatedList.splice(index, 1);
+  return Object.assign({}, state, {
+    todosList: updatedList
+  })
+
+} 
 
 export default TodoReducer;

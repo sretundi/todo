@@ -1,0 +1,12 @@
+
+.todoElement:hover .deleteIcon {
+  opacity: 1;
+}
+
+.deleteIcon {
+  opacity: 0;
+}
+
+.deleteIcon:hover {
+  opacity: 1;
+}

@@ -3,6 +3,7 @@
 export const ACTION_CONSTANTS = {
   SUMBIT_TODO: 'SUBMIT_TODO',
   TODO_INPUT_ONCHANGE: 'TODO_INPUT_ONCHANGE',
+  DELETE_TODO: 'DELETE_TODO'
 };
 
 const actionUtils = {
@@ -32,8 +33,15 @@ const handleKeyPress = (data) => {
   })
 }
 
+const deleteTodo = (index) => {
+  return (dispatch => {
+    dispatch(actionUtils.createAction(ACTION_CONSTANTS.DELETE_TODO, index))
+  })
+}
+
 export default {
   submitTodo,
   todoInputOnChange,
-  handleKeyPress
+  handleKeyPress,
+  deleteTodo
 }
