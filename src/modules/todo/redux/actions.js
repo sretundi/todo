@@ -2,7 +2,7 @@
 
 export const ACTION_CONSTANTS = {
   SUMBIT_TODO: 'SUBMIT_TODO',
-  TODO_INPUT_ONCHANGE: 'TODO_INPUT_ONCHANGE' 
+  TODO_INPUT_ONCHANGE: 'TODO_INPUT_ONCHANGE',
 };
 
 const actionUtils = {
@@ -26,7 +26,14 @@ const todoInputOnChange = (data) => {
   }
 }
 
+const handleKeyPress = (data) => {
+  return (dispatch => {
+    dispatch(actionUtils.createAction(ACTION_CONSTANTS.SUMBIT_TODO, null));
+  })
+}
+
 export default {
   submitTodo,
-  todoInputOnChange
+  todoInputOnChange,
+  handleKeyPress
 }
