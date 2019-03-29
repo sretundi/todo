@@ -1,21 +1,32 @@
 
 
 export const ACTION_CONSTANTS = {
-
+  SUMBIT_TODO: 'SUBMIT_TODO',
+  TODO_INPUT_ONCHANGE: 'TODO_INPUT_ONCHANGE' 
 };
 
-const blankActionCreator = () => {
-  const createAction = (data) => {
+const actionUtils = {
+  createAction: (constant, data) => {
     return {
-      type: 'im a constant',
+      type: constant,
       data
     }
   }
-  return (dispatch, getState) => {
-    dispatch(createAction);
+}
+
+const submitTodo = () => {
+  return (dispatch) => {
+    dispatch(actionUtils.createAction(ACTION_CONSTANTS.SUMBIT_TODO, null))
+  }
+}
+
+const todoInputOnChange = (data) => {
+  return (dispatch) => {
+    dispatch(actionUtils.createAction(ACTION_CONSTANTS.TODO_INPUT_ONCHANGE, data))
   }
 }
 
 export default {
-  blankActionCreator
+  submitTodo,
+  todoInputOnChange
 }
