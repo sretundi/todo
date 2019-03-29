@@ -1,5 +1,5 @@
 
-import actions, { ACTION_CONSTANTS } from './actions';
+import { ACTION_CONSTANTS } from './actions';
 import Todo from '../Todo';
 
 const initialState = () => {
@@ -17,6 +17,8 @@ const TodoReducer = (state = initialState(), action) => {
       return addTodoToList(state, action.data)
     case ACTION_CONSTANTS.DELETE_TODO:
       return deleteTodoFromList(state, action.data)
+    case ACTION_CONSTANTS.TOGGLE_TODO_STATUS:
+      return toggleTodoStatus(state, action.data)
     default:
       return state;
   }
@@ -48,7 +50,16 @@ const deleteTodoFromList = (state, index) => {
   return Object.assign({}, state, {
     todosList: updatedList
   })
-
 } 
+
+const toggleTodoStatus = (state, index) => {
+  const todo = {...state.todosList[index]};
+  todo.isCompleted = !todo.isCompleted;
+  const updatedList = [...state.todosList];
+  updatedList[index] = todo;
+  return Object.assign({}, state, {
+    todosList: updatedList
+  })
+}
 
 export default TodoReducer;

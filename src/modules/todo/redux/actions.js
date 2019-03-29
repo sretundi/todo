@@ -3,7 +3,8 @@
 export const ACTION_CONSTANTS = {
   SUMBIT_TODO: 'SUBMIT_TODO',
   TODO_INPUT_ONCHANGE: 'TODO_INPUT_ONCHANGE',
-  DELETE_TODO: 'DELETE_TODO'
+  DELETE_TODO: 'DELETE_TODO',
+  TOGGLE_TODO_STATUS: 'TOGGLE_TODO_STATUS',
 };
 
 const actionUtils = {
@@ -39,9 +40,16 @@ const deleteTodo = (index) => {
   })
 }
 
+const toggleTodoStatus = (index) => {
+  return (dispatch => {
+    dispatch(actionUtils.createAction(ACTION_CONSTANTS.TOGGLE_TODO_STATUS, index))
+  })
+}
+
 export default {
   submitTodo,
   todoInputOnChange,
   handleKeyPress,
-  deleteTodo
+  deleteTodo,
+  toggleTodoStatus
 }

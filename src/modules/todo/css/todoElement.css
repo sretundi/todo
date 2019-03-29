@@ -10,3 +10,7 @@
 .todoElement__deleteIcon:hover {
   opacity: 1;
 }
+
+.todoElement__todoValue--strike {
+  text-decoration: line-through;
+}
