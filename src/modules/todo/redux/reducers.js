@@ -91,7 +91,7 @@ const editTodoOnChange = (state, data) => {
 const onSaveOrDiscardEditedTodo = (state, data) => {
   if (data.subAction === actionUtils.subActionConstants.SAVE) {
     const updatedList = [...state.todosList];
-    if (updatedList[data.index].editedValue === '' || updatedList[data.index].editedValue === ' ') {
+    if (updatedList[data.index].editedValue === '' || !/\S/.test(updatedList[data.index].editedValue)) {
       updatedList.splice(data.index, 1);
     } else {
       updatedList[data.index].todoValue = updatedList[data.index].editedValue;
