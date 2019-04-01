@@ -1,11 +1,11 @@
 
-import { ACTION_CONSTANTS } from './actions';
+import { ACTION_CONSTANTS, actionUtils } from './actions';
 import Todo from '../Todo';
 
 const initialState = () => {
   return Object.assign({
     todoInputValue: '',
-    todosList: []
+    todosList: [],
   })
 }
 
@@ -19,6 +19,12 @@ const TodoReducer = (state = initialState(), action) => {
       return deleteTodoFromList(state, action.data)
     case ACTION_CONSTANTS.TOGGLE_TODO_STATUS:
       return toggleTodoStatus(state, action.data)
+    case ACTION_CONSTANTS.TOGGLE_EDITABLE_STATE:
+      return toggleEditableState(state, action.data)
+    case ACTION_CONSTANTS.EDIT_TODO_ONCHANGE: 
+      return editTodoOnChange(state, action.data)
+    case ACTION_CONSTANTS.ON_KEY_PRESS_FROM_EDITABLE_STATE:
+      return onSaveOrDiscardEditedTodo(state, action.data)
     default:
       return state;
   }
@@ -53,13 +59,60 @@ const deleteTodoFromList = (state, index) => {
 } 
 
 const toggleTodoStatus = (state, index) => {
-  const todo = {...state.todosList[index]};
+  const todo = getTodoByIndex(state, index)
   todo.isCompleted = !todo.isCompleted;
   const updatedList = [...state.todosList];
   updatedList[index] = todo;
   return Object.assign({}, state, {
     todosList: updatedList
   })
+}
+
+const toggleEditableState = (state, index) => {
+  const todo = getTodoByIndex(state, index)
+  todo.isEditable = !todo.isEditable;
+  const updatedList = [...state.todosList];
+  updatedList[index] = todo;
+  return Object.assign({}, state, {
+    todosList: updatedList
+  })
+}
+
+const editTodoOnChange = (state, data) => {
+  const todo = getTodoByIndex(state, data.index)
+  todo.editedValue = data.value;
+  const updatedList = [...state.todosList];
+  updatedList[data.index] = todo;
+  return Object.assign({}, state, {
+    todosList: updatedList
+  })
+}
+
+const onSaveOrDiscardEditedTodo = (state, data) => {
+  if (data.subAction === actionUtils.subActionConstants.SAVE) {
+    const updatedList = [...state.todosList];
+    if (updatedList[data.index].editedValue === '' || updatedList[data.index].editedValue === ' ') {
+      updatedList.splice(data.index, 1);
+    } else {
+      updatedList[data.index].todoValue = updatedList[data.index].editedValue;
+      updatedList[data.index].isEditable = false;
+    }
+    return Object.assign({}, state, {
+      todosList: updatedList,
+    })
+  } else if (data.subAction === actionUtils.subActionConstants.DISCARD) {
+    const updatedList = [...state.todosList];
+    updatedList[data.index].editedValue = '';
+    updatedList[data.index].isEditable = false;
+    return Object.assign({}, state, {
+      todosList: updatedList,
+    })
+  }
+  return state;
+}
+
+const getTodoByIndex = (state, index) => {
+  return {...state.todosList[index]};
 }
 
 export default TodoReducer;

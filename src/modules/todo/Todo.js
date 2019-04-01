@@ -3,18 +3,19 @@ class Todo {
   constructor() {
     this.todoValue = '';
     this.isCompleted = false;
+    this.isEditable = false;
+    this.editedValue = ''
   }
 
   setTodoValue(todo) {
-    if (this.validTodo(todo)) {
-      this.todoValue = todo;
-    }
+    this.todoValue = todo;
   }
 
   getTodo() {
     return {
       todoValue: this.todoValue,
-      isCompleted: this.isCompleted
+      isCompleted: this.isCompleted,
+      isEditable: this.isEditable
     }
   }
 

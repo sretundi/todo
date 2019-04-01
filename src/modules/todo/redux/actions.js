@@ -5,14 +5,21 @@ export const ACTION_CONSTANTS = {
   TODO_INPUT_ONCHANGE: 'TODO_INPUT_ONCHANGE',
   DELETE_TODO: 'DELETE_TODO',
   TOGGLE_TODO_STATUS: 'TOGGLE_TODO_STATUS',
+  TOGGLE_EDITABLE_STATE: 'TOGGLE_EDITABLE_STATE',
+  EDIT_TODO_ONCHANGE: 'EDIT_TODO_ONCHANGE',
+  ON_KEY_PRESS_FROM_EDITABLE_STATE: 'KEY_PRESS_FROM_EDITABLE_STATE'
 };
 
-const actionUtils = {
+export const actionUtils = {
   createAction: (constant, data) => {
     return {
       type: constant,
       data
     }
+  },
+  subActionConstants: {
+    DISCARD: 'DISCARD',
+    SAVE: 'SAVE'
   }
 }
 
@@ -46,10 +53,37 @@ const toggleTodoStatus = (index) => {
   })
 }
 
+const toggleEditableState = (index) => {
+  return (dispatch => {
+    dispatch(actionUtils.createAction(ACTION_CONSTANTS.TOGGLE_EDITABLE_STATE, index))
+  })
+}
+
+const editTodoOnChange = (index, value) => {
+  const data = {
+    index, value
+  }
+  return (dispatch => {
+    dispatch(actionUtils.createAction(ACTION_CONSTANTS.EDIT_TODO_ONCHANGE, data))
+  })
+}
+
+const onKeyPressFromEditableState = (index, subAction) => {
+  const data = {
+    index, subAction
+  }
+  return (dispatch => {
+    dispatch(actionUtils.createAction(ACTION_CONSTANTS.ON_KEY_PRESS_FROM_EDITABLE_STATE, data))
+  })
+}
+
 export default {
   submitTodo,
   todoInputOnChange,
   handleKeyPress,
   deleteTodo,
-  toggleTodoStatus
+  toggleTodoStatus,
+  toggleEditableState,
+  editTodoOnChange,
+  onKeyPressFromEditableState
 }
