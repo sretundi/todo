@@ -71,6 +71,7 @@ const toggleTodoStatus = (state, index) => {
 const toggleEditableState = (state, index) => {
   const todo = getTodoByIndex(state, index)
   todo.isEditable = !todo.isEditable;
+  todo.editedValue = todo.InputValue;
   const updatedList = [...state.todosList];
   updatedList[index] = todo;
   return Object.assign({}, state, {
@@ -91,10 +92,12 @@ const editTodoOnChange = (state, data) => {
 const onSaveOrDiscardEditedTodo = (state, data) => {
   if (data.subAction === actionUtils.subActionConstants.SAVE) {
     const updatedList = [...state.todosList];
-    if (updatedList[data.index].editedValue === '' || !/\S/.test(updatedList[data.index].editedValue)) {
+    const editedValue = updatedList[data.index].editedValue;
+    const todo = getTodoByIndex(state, data.index);
+    if (!todo.validTodo(editedValue)) {
       updatedList.splice(data.index, 1);
     } else {
-      updatedList[data.index].todoValue = updatedList[data.index].editedValue;
+      updatedList[data.index].todoValue = editedValue;
       updatedList[data.index].isEditable = false;
     }
     return Object.assign({}, state, {

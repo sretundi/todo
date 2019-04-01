@@ -5,6 +5,10 @@ class Todo {
     this.isCompleted = false;
     this.isEditable = false;
     this.editedValue = ''
+
+    this.getTodo = this.getTodo.bind(this);
+    this.setTodoValue = this.setTodoValue.bind(this);
+    this.validTodo = this.validTodo.bind(this);
   }
 
   setTodoValue(todo) {
@@ -12,15 +16,11 @@ class Todo {
   }
 
   getTodo() {
-    return {
-      todoValue: this.todoValue,
-      isCompleted: this.isCompleted,
-      isEditable: this.isEditable
-    }
+    return this;
   }
 
   validTodo(todo) {
-    if (todo !== '' && todo !== ' ') {
+    if (todo !== '' && /\S/.test(todo)) {
       return true;
     }
     return false;
