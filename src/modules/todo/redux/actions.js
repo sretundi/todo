@@ -9,7 +9,8 @@ export const ACTION_CONSTANTS = {
   EDIT_TODO_ONCHANGE: 'EDIT_TODO_ONCHANGE',
   ON_KEY_PRESS_FROM_EDITABLE_STATE: 'KEY_PRESS_FROM_EDITABLE_STATE',
   TOGGLE_ALL_TODOS: 'TOGGLE_ALL_TODOS',
-  CLEAR_COMPLETED_TODOS: 'CLEAR_COMPLETED_TODOS'
+  CLEAR_COMPLETED_TODOS: 'CLEAR_COMPLETED_TODOS',
+  TODO_FILTER: 'TODO_FILTER'
 };
 
 export const actionUtils = {
@@ -22,6 +23,11 @@ export const actionUtils = {
   subActionConstants: {
     DISCARD: 'DISCARD',
     SAVE: 'SAVE'
+  },
+  todoFilterConstants: {
+    ALL: 'ALL',
+    ACTIVE: 'ACTIVE',
+    COMPLETED: 'COMPLETED'
   }
 }
 
@@ -43,36 +49,36 @@ const handleKeyPress = (data) => {
   })
 }
 
-const deleteTodo = (index) => {
+const deleteTodo = (id) => {
   return (dispatch => {
-    dispatch(actionUtils.createAction(ACTION_CONSTANTS.DELETE_TODO, index))
+    dispatch(actionUtils.createAction(ACTION_CONSTANTS.DELETE_TODO, id))
   })
 }
 
-const toggleTodoStatus = (index) => {
+const toggleTodoStatus = (id) => {
   return (dispatch => {
-    dispatch(actionUtils.createAction(ACTION_CONSTANTS.TOGGLE_TODO_STATUS, index))
+    dispatch(actionUtils.createAction(ACTION_CONSTANTS.TOGGLE_TODO_STATUS, id))
   })
 }
 
-const toggleEditableState = (index) => {
+const toggleEditableState = (id) => {
   return (dispatch => {
-    dispatch(actionUtils.createAction(ACTION_CONSTANTS.TOGGLE_EDITABLE_STATE, index))
+    dispatch(actionUtils.createAction(ACTION_CONSTANTS.TOGGLE_EDITABLE_STATE, id))
   })
 }
 
-const editTodoOnChange = (index, value) => {
+const editTodoOnChange = (id, value) => {
   const data = {
-    index, value
+    id, value
   }
   return (dispatch => {
     dispatch(actionUtils.createAction(ACTION_CONSTANTS.EDIT_TODO_ONCHANGE, data))
   })
 }
 
-const onKeyPressFromEditableState = (index, subAction) => {
+const onKeyPressFromEditableState = (id, subAction) => {
   const data = {
-    index, subAction
+    id, subAction
   }
   return (dispatch => {
     dispatch(actionUtils.createAction(ACTION_CONSTANTS.ON_KEY_PRESS_FROM_EDITABLE_STATE, data))
@@ -91,6 +97,12 @@ const clearCompletedTodos = () => {
   })
 }
 
+const filterTodos = (filterType) => {
+  return (dispatch => {
+    dispatch(actionUtils.createAction(ACTION_CONSTANTS.TODO_FILTER, filterType))
+  })
+}
+
 export default {
   submitTodo,
   todoInputOnChange,
@@ -101,5 +113,6 @@ export default {
   editTodoOnChange,
   onKeyPressFromEditableState,
   toggleAllTodos,
-  clearCompletedTodos
+  clearCompletedTodos,
+  filterTodos
 }

@@ -10,20 +10,20 @@ const TodoElement = (todo) => {
   return (
     <div className='todoElement'>
       <input 
-        onKeyUp={todo.isEditable ? (e) => keyPressEvent(e, todo.index, todo.actions.onKeyPressFromEditableState) : () => {}}
-        onDoubleClick={()=> todo.actions.toggleEditableState(todo.index)}
-        onChange={todo.isEditable ? (e) => todo.actions.editTodoOnChange(todo.index, e.target.value) : () => {}}
+        onKeyUp={todo.isEditable ? (e) => keyPressEvent(e, todo.id, todo.actions.onKeyPressFromEditableState) : () => {}}
+        onDoubleClick={()=> todo.actions.toggleEditableState(todo.id)}
+        onChange={todo.isEditable ? (e) => todo.actions.editTodoOnChange(todo.id, e.target.value) : () => {}}
         className={lineThrough(todo.isCompleted)} 
         value={todo.isEditable ? todo.editedValue : todo.todoValue} 
       ></input>
       <input 
         type='checkbox' 
         checked={todo.isCompleted} 
-        onChange={() => todo.actions.toggleTodoStatus(todo.index)}
+        onChange={() => todo.actions.toggleTodoStatus(todo.id)}
       ></input>
       <button
         className='todoElement__deleteIcon'
-        onClick={() => todo.actions.deleteTodo(todo.index)}
+        onClick={() => todo.actions.deleteTodo(todo.id)}
       >Delete</button>
     </div>
   )
@@ -33,13 +33,13 @@ const lineThrough = (isCompleted) => {
   return isCompleted ? 'todoElement__todoValue--strike' : '';
 }
 
-const keyPressEvent = (e, index, callback) => {
+const keyPressEvent = (e, id, callback) => {
   const enterKey = 'Enter';
   const escapeKey = 'Escape';
   if (e.key === enterKey) {
-    return callback(index, actionUtils.subActionConstants.SAVE)
+    return callback(id, actionUtils.subActionConstants.SAVE)
   } else if (e.key === escapeKey) {
-    return callback(index, actionUtils.subActionConstants.DISCARD)
+    return callback(id, actionUtils.subActionConstants.DISCARD)
   } 
 }
 
