@@ -25,6 +25,8 @@ const TodoReducer = (state = initialState(), action) => {
       return editTodoOnChange(state, action.data)
     case ACTION_CONSTANTS.ON_KEY_PRESS_FROM_EDITABLE_STATE:
       return onSaveOrDiscardEditedTodo(state, action.data)
+    case ACTION_CONSTANTS.TOGGLE_ALL_TODOS:
+      return toggleAllTodos(state);
     default:
       return state;
   }
@@ -112,6 +114,30 @@ const onSaveOrDiscardEditedTodo = (state, data) => {
     })
   }
   return state;
+}
+
+const toggleAllTodos = (state) => {
+  const completedTodos = state.todosList.filter(todo => todo.isCompleted === true);
+  let updatedList = [];
+  if (completedTodos.length === state.todosList.length) {
+    updatedList = completedTodos.map((todo) => {
+      todo.isCompleted = false;
+      return todo;
+    })
+  } else if (completedTodos.length > 0) {
+    updatedList = state.todosList.map((todo) => {
+      if (!todo.isCompleted) {
+        todo.isCompleted = true;
+        return todo;
+      }
+      return todo;
+    })
+  } else {
+    updatedList = state.todosList.map(todo => todo);
+  }
+  return Object.assign({}, state, {
+    todosList: updatedList
+  })
 }
 
 const getTodoByIndex = (state, index) => {

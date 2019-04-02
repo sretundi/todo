@@ -7,13 +7,14 @@ import { mapStateToProps, mapDispatchToProps } from './redux/reduxBindings';
 
 import TodoInput from './elements/todoInput';
 import TodoList from './elements/todoList';
+import TodoHeader from './elements/todoHeader';
 
 import './index.css';
 
 const Todo = (props) => {
   return (
     <div className='todoContainer'>
-      <p>Hello world</p>
+      <TodoHeader {...props} />
       <TodoInput {...props}/>
       <TodoList {...props} />
     </div>
