@@ -28,6 +28,8 @@ const TodoReducer = (state = initialState(), action) => {
       return onSaveOrDiscardEditedTodo(state, action.data)
     case ACTION_CONSTANTS.TOGGLE_ALL_TODOS:
       return toggleAllTodos(state);
+    case ACTION_CONSTANTS.CLEAR_COMPLETED_TODOS:
+      return clearCompletedTodos(state);
     default:
       return state;
   }
@@ -143,6 +145,12 @@ const toggleAllTodos = (state) => {
   return Object.assign({}, state, {
     todosList: updatedList,
     incompleteTodosCount: getNumberOfIncompleteTodos(updatedList)
+  })
+}
+
+const clearCompletedTodos = (state) => {
+  return Object.assign({}, state, {
+    todosList: state.todosList.filter(todo => todo.isCompleted === false)
   })
 }
 

@@ -8,6 +8,7 @@ const TodoHeader = (todo) => {
     <div className='todoHeader'>
       <p>Incomplete Todos Remaining {todo.incompleteTodosCount}</p>
       <button onClick={todo.actions.toggleAllTodos}>Toggle Todos</button>
+      <button onClick={todo.actions.clearCompletedTodos}>Clear Completed Todos</button>
     </div>
   )
 }

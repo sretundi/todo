@@ -8,7 +8,8 @@ export const ACTION_CONSTANTS = {
   TOGGLE_EDITABLE_STATE: 'TOGGLE_EDITABLE_STATE',
   EDIT_TODO_ONCHANGE: 'EDIT_TODO_ONCHANGE',
   ON_KEY_PRESS_FROM_EDITABLE_STATE: 'KEY_PRESS_FROM_EDITABLE_STATE',
-  TOGGLE_ALL_TODOS: 'TOGGLE_ALL_TODOS'
+  TOGGLE_ALL_TODOS: 'TOGGLE_ALL_TODOS',
+  CLEAR_COMPLETED_TODOS: 'CLEAR_COMPLETED_TODOS'
 };
 
 export const actionUtils = {
@@ -84,6 +85,12 @@ const toggleAllTodos = () => {
   })
 }
 
+const clearCompletedTodos = () => {
+  return (dispatch => {
+    dispatch(actionUtils.createAction(ACTION_CONSTANTS.CLEAR_COMPLETED_TODOS))
+  })
+}
+
 export default {
   submitTodo,
   todoInputOnChange,
@@ -93,5 +100,6 @@ export default {
   toggleEditableState,
   editTodoOnChange,
   onKeyPressFromEditableState,
-  toggleAllTodos
+  toggleAllTodos,
+  clearCompletedTodos
 }
