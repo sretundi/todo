@@ -58,6 +58,7 @@ const addTodoToList = (state) => {
     return Object.assign({}, state, {
       todosList: updatedList,
       todoInputValue: '',
+      incompleteTodosCount: getNumberOfIncompleteTodos(updatedList)
     })
   }
   return state;

@@ -5,7 +5,7 @@ class Todo {
     this.isCompleted = false;
     this.isEditable = false;
     this.editedValue = ''
-    this.id = `${new Date().getMinutes()}-${Math.floor(Math.random() * 20) + 1}`
+    this.id = `${new Date().getMilliseconds()}-todo`
 
     this.getTodo = this.getTodo.bind(this);
     this.setTodoValue = this.setTodoValue.bind(this);

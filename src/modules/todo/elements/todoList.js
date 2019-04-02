@@ -9,18 +9,18 @@ const TodoList = (props) => {
   if (props.todoFilter.COMPLETED) {
     listElements = props.todosList
     .filter(todo => todo.isCompleted === true)
-    .map((todo, index) => {
-      return todoListItem(todo, props, index)      
+    .map((todo) => {
+      return todoListItem(todo, props)      
     })
   } else if (props.todoFilter.ACTIVE) {
     listElements = props.todosList
       .filter(todo => todo.isCompleted === false)
-      .map((todo, index) => {
-        return todoListItem(todo, props, index)      
+      .map((todo) => {
+        return todoListItem(todo, props)      
       })
   } else {
-    listElements = props.todosList.map((todo, index) => {
-      return todoListItem(todo, props, index)      
+    listElements = props.todosList.map((todo) => {
+      return todoListItem(todo, props)      
     })
   }
   return (
@@ -30,10 +30,10 @@ const TodoList = (props) => {
   )
 }
 
-const todoListItem = (todo, props, index) => {
+const todoListItem = (todo, props) => {
   return (
-    <li key={index} >
-      <TodoElement {...todo} {...props} index={index} /> 
+    <li key={todo.id} >
+      <TodoElement {...todo} {...props} /> 
     </li>
   )
 }
