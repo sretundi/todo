@@ -6,6 +6,7 @@ const initialState = () => {
   return Object.assign({
     todoInputValue: '',
     todosList: [],
+    incompleteTodosCount: 0,
   })
 }
 
@@ -56,7 +57,8 @@ const deleteTodoFromList = (state, index) => {
   const updatedList = [...state.todosList];
   updatedList.splice(index, 1);
   return Object.assign({}, state, {
-    todosList: updatedList
+    todosList: updatedList,
+    incompleteTodosCount: getNumberOfIncompleteTodos(updatedList)
   })
 } 
 
@@ -66,7 +68,8 @@ const toggleTodoStatus = (state, index) => {
   const updatedList = [...state.todosList];
   updatedList[index] = todo;
   return Object.assign({}, state, {
-    todosList: updatedList
+    todosList: updatedList,
+    incompleteTodosCount: getNumberOfIncompleteTodos(updatedList)
   })
 }
 
@@ -104,6 +107,7 @@ const onSaveOrDiscardEditedTodo = (state, data) => {
     }
     return Object.assign({}, state, {
       todosList: updatedList,
+      incompleteTodosCount: getNumberOfIncompleteTodos(updatedList)
     })
   } else if (data.subAction === actionUtils.subActionConstants.DISCARD) {
     const updatedList = [...state.todosList];
@@ -111,6 +115,7 @@ const onSaveOrDiscardEditedTodo = (state, data) => {
     updatedList[data.index].isEditable = false;
     return Object.assign({}, state, {
       todosList: updatedList,
+      incompleteTodosCount: getNumberOfIncompleteTodos(updatedList)
     })
   }
   return state;
@@ -136,12 +141,17 @@ const toggleAllTodos = (state) => {
     updatedList = state.todosList.map(todo => todo);
   }
   return Object.assign({}, state, {
-    todosList: updatedList
+    todosList: updatedList,
+    incompleteTodosCount: getNumberOfIncompleteTodos(updatedList)
   })
 }
 
 const getTodoByIndex = (state, index) => {
   return {...state.todosList[index]};
+}
+
+const getNumberOfIncompleteTodos = (list) => {
+  return list.filter(todo => todo.isCompleted === false).length
 }
 
 export default TodoReducer;
