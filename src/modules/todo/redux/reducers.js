@@ -1,7 +1,13 @@
 
+import { getFromLocal } from '../../LocalStorage/index';
 import { ACTION_CONSTANTS, actionUtils } from './actions';
 
 const initialState = () => {
+  const Key = 'TODOS_LIST';
+  const fromLocal = getFromLocal(Key);
+  if (fromLocal) {
+    return {...fromLocal}
+  }
   return Object.assign({
     todoInputValue: '',
     todosList: [],
@@ -30,7 +36,6 @@ const TodoReducer = (state = initialState(), action) => {
       return toggleEditableState(state, action.data)
     case ACTION_CONSTANTS.EDIT_TODO_ONCHANGE: 
       return editTodoOnChange(state, action.data)
-      // return clearCompletedTodos(state);
     case ACTION_CONSTANTS.TODO_FILTER: 
       return filterTodos(state, action.data);
     default:

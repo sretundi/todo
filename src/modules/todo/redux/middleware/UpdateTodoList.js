@@ -1,13 +1,13 @@
 import { getNumberOfIncompleteTodos, getTodoById, updateTodoInList } from '../reducers';
 import { actionUtils } from '../actions';
 
-import Todo from '../../Todo';
+import Todo, { validTodo} from '../../Todo';
 import { saveToLocal } from '../../../LocalStorage/index';
 
 export const addTodoList = (state) => {
   const updatedList = [...state.todosList];
   const todo = new Todo();
-  if (todo.validTodo(state.todoInputValue)) {
+  if (validTodo(state.todoInputValue)) {
     todo.setTodoValue(state.todoInputValue);
     updatedList.push(todo.getTodo());
     return Object.assign({}, state, {
@@ -32,7 +32,7 @@ export const onSaveOrDiscardEditedTodo = (data) => (state) => {
   if (data.subAction === actionUtils.subActionConstants.SAVE) {
     let updatedList = [...state.todosList];
     const editedValue = todo.editedValue;
-    if (!todo.validTodo(editedValue)) {
+    if (!validTodo(editedValue)) {
       updatedList = updatedList.filter(todo => todo.id !== data.id)
     } else {
       todo.todoValue = editedValue;

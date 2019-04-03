@@ -19,13 +19,13 @@ class Todo {
   getTodo() {
     return this;
   }
+}
 
-  validTodo(todo) {
-    if (todo !== '' && /\S/.test(todo)) {
-      return true;
-    }
-    return false;
+export const validTodo = (todo) => {
+  if (todo !== '' && /\S/.test(todo)) {
+    return true;
   }
+  return false;
 }
 
 export default Todo;
