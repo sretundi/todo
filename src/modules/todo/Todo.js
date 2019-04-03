@@ -9,7 +9,6 @@ class Todo {
 
     this.getTodo = this.getTodo.bind(this);
     this.setTodoValue = this.setTodoValue.bind(this);
-    this.validTodo = this.validTodo.bind(this);
   }
 
   setTodoValue(todo) {
