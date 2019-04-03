@@ -22,4 +22,13 @@ const keyPressEvent = (e, props) => {
   }
 }
 
+TodoInput.propTypes = {
+  todoInputValue: PropTypes.string.isRequired,
+  actions: PropTypes.objectOf(PropTypes.func).isRequired
+};
+
+TodoInput.defaultProps = {
+  todoInputValue: '',
+};
+
 export default TodoInput;

@@ -43,4 +43,18 @@ const keyPressEvent = (e, id, callback) => {
   } 
 }
 
+TodoElement.propTypes = {
+  actions: PropTypes.objectOf(PropTypes.func).isRequired,
+  isEditable: PropTypes.bool.isRequired,
+  todoEditedValue: PropTypes.string,
+  todoValue: PropTypes.string.isRequired,
+  isCompleted: PropTypes.bool.isRequired
+};
+
+TodoElement.defaultProps = {
+  todoValue: '',
+  isCompleted: false,
+  isEditable: false
+};
+
 export default TodoElement;

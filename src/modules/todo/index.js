@@ -22,11 +22,11 @@ const Todo = (props) => {
 }
 
 Todo.propTypes = {
-
+  props: PropTypes.object.isRequired
 };
 
 Todo.defaultProps = {
-
+  props: {}
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Todo);

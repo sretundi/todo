@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types'; 
 
 import TodoElement from './todoElement';
-import { actionUtils } from '../redux/actions';
 
 const TodoList = (props) => {
   let listElements = [];
@@ -37,5 +36,15 @@ const todoListItem = (todo, props) => {
     </li>
   )
 }
+
+TodoList.propTypes = {
+  todoFilter: PropTypes.objectOf(PropTypes.bool),
+  todosList: PropTypes.arrayOf(PropTypes.object)
+};
+
+TodoList.defaultProps = {
+  todoFilter: {},
+  todosList: []
+};
 
 export default TodoList;

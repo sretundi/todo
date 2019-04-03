@@ -16,4 +16,13 @@ const TodoHeader = (todo) => {
   )
 }
 
+TodoHeader.propTypes = {
+  actions: PropTypes.objectOf(PropTypes.func).isRequired,
+  incompleteTodosCount: PropTypes.number.isRequired
+};
+
+TodoHeader.defaultProps = {
+  incompleteTodosCount: 0,
+};
+
 export default TodoHeader;

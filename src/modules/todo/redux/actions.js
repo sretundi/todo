@@ -1,6 +1,13 @@
 
-import UpdateTodoList, { addTodoList, deleteTodoFromList, onSaveOrDiscardEditedTodo, toggleTodos, todoStatus, clearTodos } from './middleware/UpdateTodoList';
-import { updateTodoInList } from './reducers';
+import UpdateTodoList, 
+  { 
+    addTodoList, 
+    deleteTodoFromList, 
+    onSaveOrDiscardEditedTodo, 
+    toggleTodos, 
+    todoStatus, 
+    clearTodos 
+  } from './middleware/UpdateTodoList';
 
 export const ACTION_CONSTANTS = {
   SUMBIT_TODO: 'SUBMIT_TODO',

@@ -28,4 +28,12 @@ const TodoFilter = (todo) => {
   )
 }
 
+TodoFilter.propTypes = {
+  actions: PropTypes.objectOf(PropTypes.func).isRequired,
+  todoFilter: PropTypes.objectOf(PropTypes.bool).isRequired
+};
+
+TodoFilter.defaultProps = {
+};
+
 export default TodoFilter;
