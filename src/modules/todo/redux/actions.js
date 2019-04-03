@@ -1,4 +1,6 @@
 
+import UpdateTodoList, { addTodoList, deleteTodoFromList, onSaveOrDiscardEditedTodo, toggleTodos, todoStatus, clearTodos } from './middleware/UpdateTodoList';
+import { updateTodoInList } from './reducers';
 
 export const ACTION_CONSTANTS = {
   SUMBIT_TODO: 'SUBMIT_TODO',
@@ -32,8 +34,8 @@ export const actionUtils = {
 }
 
 const submitTodo = () => {
-  return (dispatch) => {
-    dispatch(actionUtils.createAction(ACTION_CONSTANTS.SUMBIT_TODO, null))
+  return (dispatch, getState) => {
+    dispatch(actionUtils.createAction(ACTION_CONSTANTS.SUMBIT_TODO, UpdateTodoList(getState().TodoState, addTodoList)))
   }
 }
 
@@ -43,22 +45,22 @@ const todoInputOnChange = (data) => {
   }
 }
 
-const handleKeyPress = (data) => {
-  return (dispatch => {
-    dispatch(actionUtils.createAction(ACTION_CONSTANTS.SUMBIT_TODO, null));
-  })
+const handleKeyPress = () => {
+  return (dispatch, getState) => {
+    dispatch(actionUtils.createAction(ACTION_CONSTANTS.SUMBIT_TODO, UpdateTodoList(getState().TodoState, addTodoList)));
+  };
 }
 
 const deleteTodo = (id) => {
-  return (dispatch => {
-    dispatch(actionUtils.createAction(ACTION_CONSTANTS.DELETE_TODO, id))
-  })
+  return (dispatch, getState) => {
+    dispatch(actionUtils.createAction(ACTION_CONSTANTS.DELETE_TODO, UpdateTodoList(getState().TodoState, deleteTodoFromList(id))))
+  };
 }
 
 const toggleTodoStatus = (id) => {
-  return (dispatch => {
-    dispatch(actionUtils.createAction(ACTION_CONSTANTS.TOGGLE_TODO_STATUS, id))
-  })
+  return (dispatch, getState) => {
+    dispatch(actionUtils.createAction(ACTION_CONSTANTS.TOGGLE_TODO_STATUS, UpdateTodoList(getState().TodoState, todoStatus(id))))
+  };
 }
 
 const toggleEditableState = (id) => {
@@ -80,21 +82,21 @@ const onKeyPressFromEditableState = (id, subAction) => {
   const data = {
     id, subAction
   }
-  return (dispatch => {
-    dispatch(actionUtils.createAction(ACTION_CONSTANTS.ON_KEY_PRESS_FROM_EDITABLE_STATE, data))
-  })
+  return (dispatch, getState) => {
+    dispatch(actionUtils.createAction(ACTION_CONSTANTS.ON_KEY_PRESS_FROM_EDITABLE_STATE, UpdateTodoList(getState().TodoState, onSaveOrDiscardEditedTodo(data))))
+  };
 }
 
 const toggleAllTodos = () => {
-  return (dispatch => {
-    dispatch(actionUtils.createAction(ACTION_CONSTANTS.TOGGLE_ALL_TODOS))
-  })
+  return (dispatch, getState) => {
+    dispatch(actionUtils.createAction(ACTION_CONSTANTS.TOGGLE_ALL_TODOS, UpdateTodoList(getState().TodoState, toggleTodos)))
+  };
 }
 
 const clearCompletedTodos = () => {
-  return (dispatch => {
-    dispatch(actionUtils.createAction(ACTION_CONSTANTS.CLEAR_COMPLETED_TODOS))
-  })
+  return (dispatch, getState) => {
+    dispatch(actionUtils.createAction(ACTION_CONSTANTS.CLEAR_COMPLETED_TODOS, UpdateTodoList(getState().TodoState, clearTodos)))
+  };
 }
 
 const filterTodos = (filterType) => {
